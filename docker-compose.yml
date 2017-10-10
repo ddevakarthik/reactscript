@@ -1,0 +1,22 @@
+version: '2'
+services:
+
+  microservice:
+    image: experiencedevops/customerservice:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - all
+  uireact:
+    image: experiencedevops/reactapp:e1daeea
+    environment:
+      BASE_URL: http://extelb.mytechexplorations.com:9090
+    ports:
+      - "80:80"
+    depends_on:
+      - microservice
+    networks:
+      - all
+
+networks:
+  all:
